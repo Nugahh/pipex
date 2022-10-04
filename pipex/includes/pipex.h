@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/02 23:44:35 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/04 08:26:00 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
+
+# define P_IN 0;
+# define P_OUT 1;
 
 char	*cat_cmd(char **path, char *cmd);
 

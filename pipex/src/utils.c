@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:45:35 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/03 00:52:25 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/04 08:38:27 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,28 @@ int	check_file(char *file, int ioo, char **path)
 	}
 	else
 		return (open(file, O_CREAT | O_WRONLY | O_TRUNC, 0666));
+}
+
+int	print_err(char *file, char **path)
+{
+	ft_putstr_fd("./pipex : ", 2);
+	ft_putstr_fd(file, 2);
+	perror(" ");
+	freetab(path);
+	return (-1);
+}
+
+void	freetab(char **output)
+{
+	int	i;
+
+	i = 0;
+	if (!output)
+		return ;
+	while (output[i])
+	{
+		free(output[i]);
+		++i;
+	}
+	free(output);
 }
