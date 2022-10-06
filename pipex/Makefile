@@ -14,29 +14,37 @@ NAME	=	pipex
 
 CC		=	clang
 
-CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -I./includes -g3
+CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -I ./includes -g3
 
 LIB		=	-Llibft/ -lft
 
-SRCS	= 	find_cmd.c	\
+SRCS	= 	main.c		\
 			utils.c		\
-			main.c		\
+			find_cmd.c	
 
-OBJS	:=	${addprefix ./obj/,${SRCS:%.c=%.o}}
+OBJS	:=	${addprefix ./objs/,${SRCS:%.c=%.o}}
 
-DEP		=	$(addprefix ./obj/,$(OBJS:%.o=%.d))
+DEP		=	$(addprefix ./objs/,$(OBJS:%.o=%.d))
+
+#====objects====#
+OBS_PATH = objs/
+OBS_NAME = $(SRCS:.c=.o)
+OBS = $(addprefix $(OBS_PATH), $(OBJS_NAME))
 
 all: ${NAME}
 
 -include $(DEP)
 
-./obj/%.o: ./src/*.c
-	@mkdir -p $(@D)
+$(OBS_PATH):
+	@mkdir $@
+
+$/objs/%.o: src/%.c | $(OBJS_PATH)
+	#@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 ${NAME}: ${OBJS} ./libft/libft.a
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
-	
+
 ./libft/libft.a:
 	make $(@F) -C $(@D)
 

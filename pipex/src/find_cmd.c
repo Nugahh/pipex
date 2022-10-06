@@ -6,13 +6,13 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:47:41 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/05 15:44:14 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/06 20:05:17 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static char	**get_path_and_split(char **envp)
+char	**get_path_and_split(char **envp)
 {
 	char	*path;
 	char	**paths;
@@ -36,10 +36,10 @@ static char	**get_path_and_split(char **envp)
 	return (paths);
 }
 
-static char	**add_slash(char **paths)
+char	**add_slash(char **paths)
 {
 	int		i;
-	
+
 	paths = get_path_and_split(paths);
 	i = -1;
 	while (paths[++i])
@@ -62,10 +62,10 @@ char	*check_cmd(char	*cmd, char **paths)
 			return (NULL);
 		}
 	}
-	paths = add_slash(paths);
 	i = -1;
 	while (paths[++i])
 	{
+		paths = add_slash(paths);
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (access(cmd_path, F_OK | X_OK) == 0)
 			return (cmd_path);
