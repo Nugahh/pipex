@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 12:44:32 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 12:47:30 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	first_cmd(int *fd_pipe, char **cmd, char *file, char **paths)
 {
 	int	infile;
+
 	infile = open(file, O_RDONLY);
 	dup2(fd_pipe[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
@@ -51,7 +52,7 @@ void	pipex(char **argv, char **paths)
 	if (pid == -1)
 		return (perror("Fork "));
 	else if (pid == 0)
-		first_cmd(fd_pipe, ft_split(argv[2], ' '), argv[1],  paths);
+		first_cmd(fd_pipe, ft_split(argv[2], ' '), argv[1], paths);
 	pid2 = fork();
 	if (pid2 == -1)
 		return (perror("Fork "));
