@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:47:41 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 10:42:35 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 12:22:51 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ char	*check_cmd(char	*cmd, char **paths)
 	char	*cmd_path;
 	char	*tmp;
 
-	i = -1;
-	while (cmd[++i])
-	{
-		if (cmd[i] == '/')
-		{
-			if (access(cmd, F_OK | X_OK) == 0)
-				return (cmd);
-			return (NULL);
-		}
-	}
 	i = -1;
 	while (paths[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 10:43:34 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 12:16:49 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		pipex(char **argv, char **paths);
 
 // utils
 int			check_file(char *file, int ioo);
-int			print_err(char *file, char **path);
-void		freetab(char **output);
+int			print_err(char *file);
+void		free_paths(char **paths);
 
 #endif
