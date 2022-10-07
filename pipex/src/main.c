@@ -6,38 +6,50 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/06 20:54:32 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 10:51:28 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	exec_fcmd(int *fd_pipe, char **cmd, char *file, char **paths)
+void	exec_fcmd(int fd_pipe[2], char **cmd, char *file, char **paths)
 {
 	int	infile;
+	int	fd_stdin;
 
 	infile = check_file(file, 0);
+	fd_stdin = dup(STDIN_FILENO);
 	dup2(fd_pipe[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd_pipe[0]);
 	close(fd_pipe[1]);
-	// close(infile);
+	close(infile);
 	if (execve(check_cmd(cmd[0], paths), cmd, NULL) == -1)
 		perror("fcmd err: ");
+	dup2(fd_stdin, STDIN_FILENO);
+	close(infile);
+	close(fd_stdin);
+	exit(EXIT_SUCCESS);
 }
 
 void	exec_lcmd(int *fd_pipe, char **cmd, char *file, char **paths)
 {
 	int	outfile;
+	int	fd_stdout;
 
 	outfile = check_file(file, 1);
+	fd_stdout = dup(STDOUT_FILENO);
 	dup2(fd_pipe[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd_pipe[0]);
 	close(fd_pipe[1]);
-	// close(outfile);
+	close(outfile);
 	if (execve(check_cmd(cmd[0], paths), cmd, NULL) == -1)
 		perror("lcmd err: ");
+	dup2(fd_stdout, STDOUT_FILENO);
+	close(outfile);
+	close(fd_stdout);
+	exit(EXIT_SUCCESS);
 }
 
 void	pipex(char **argv, char **paths)

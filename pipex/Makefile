@@ -20,26 +20,18 @@ LIB		=	-Llibft/ -lft
 
 SRCS	= 	main.c		\
 			utils.c		\
-			find_cmd.c	
+			find_cmd.c	\
 
 OBJS	:=	${addprefix ./objs/,${SRCS:%.c=%.o}}
 
 DEP		=	$(addprefix ./objs/,$(OBJS:%.o=%.d))
 
-#====objects====#
-OBS_PATH = objs/
-OBS_NAME = $(SRCS:.c=.o)
-OBS = $(addprefix $(OBS_PATH), $(OBJS_NAME))
-
 all: ${NAME}
 
 -include $(DEP)
 
-$(OBS_PATH):
-	@mkdir $@
-
-$/objs/%.o: src/%.c | $(OBJS_PATH)
-	#@mkdir -p $(@D)
+./objs/%.o: src/%.c
+	@@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 ${NAME}: ${OBJS} ./libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:47:41 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/06 20:05:17 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 10:42:35 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,11 @@ char	**get_path_and_split(char **envp)
 	return (paths);
 }
 
-char	**add_slash(char **paths)
-{
-	int		i;
-
-	paths = get_path_and_split(paths);
-	i = -1;
-	while (paths[++i])
-		paths[i] = ft_strjoin(paths[i], "/");
-	return (paths);
-}
-
 char	*check_cmd(char	*cmd, char **paths)
 {
-	char	*cmd_path;
 	int		i;
+	char	*cmd_path;
+	char	*tmp;
 
 	i = -1;
 	while (cmd[++i])
@@ -65,8 +55,9 @@ char	*check_cmd(char	*cmd, char **paths)
 	i = -1;
 	while (paths[++i])
 	{
-		paths = add_slash(paths);
-		cmd_path = ft_strjoin(paths[i], cmd);
+		tmp = ft_strjoin(paths[i], "/");
+		cmd_path = ft_strjoin(tmp, cmd);
+		free(tmp);
 		if (access(cmd_path, F_OK | X_OK) == 0)
 			return (cmd_path);
 		free(cmd_path);
@@ -78,7 +69,14 @@ char	*check_cmd(char	*cmd, char **paths)
 {
 	char *test = "/home/nugah/.local/bin:/usr/local/sbin:/usr/local/bin";
 	char **tab = malloc(sizeof(char *) * 1000);
-	tab = split_and_add_slash(test);
+	tab = ft_split(test, ':');
+	char *tmp;
+	// check_cmd("cat", tab);
 	for (int i = 0; tab[i]; i++)
+	{
+		tmp = ft_strjoin(tab[i], "/");
+		tab[i] = ft_strjoin(tmp, "cat");
+		free(tmp);
 		printf("tab[i] = %s\n", tab[i]);
+	}
 } */

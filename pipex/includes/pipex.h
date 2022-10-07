@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/06 20:46:18 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 10:43:34 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 /* PATH and cmd */
 char		**get_path_and_split(char **envp);
-char		**add_slash(char **paths);
 char		*check_cmd(char	*cmd, char **paths);
 
 /* exec*/
@@ -36,7 +35,7 @@ void		pipex(char **argv, char **paths);
 
 // utils
 int			check_file(char *file, int ioo);
-// int			print_err(char *file, char **path);
+int			print_err(char *file, char **path);
 void		freetab(char **output);
 
 #endif
