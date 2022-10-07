@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 12:16:49 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 16:02:50 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # include <errno.h>
 # include "../libft/libft.h"
 
-/* PATH and cmd */
+// PATH and cmd
 char		**get_path_and_split(char **envp);
 char		*check_cmd(char	*cmd, char **paths);
 
-/* exec*/
+// exec
 void		exec_fcmd(int *fd_pipe, char **cmd, char *file, char **paths);
 void		exec_lcmd(int *fd_pipe, char **cmd, char *file, char **paths);
 void		pipex(char **argv, char **paths);

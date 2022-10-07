@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 12:47:30 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 15:49:44 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	second_cmd(int *fd_pipe, char **cmd, char *file, char **paths)
 	int	outfile;
 
 	outfile = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	printf("outfile = %d\n", outfile);
 	dup2(fd_pipe[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd_pipe[0]);

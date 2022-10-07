@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:47:41 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 12:22:51 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/07 15:37:25 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,16 @@
 
 char	**get_path_and_split(char **envp)
 {
+	int		i;
 	char	*path;
 	char	**paths;
-	int		i;
 
-	i = 0;
+	i = -1;
 	path = NULL;
-	while (envp[i] != NULL && envp[i][0] != '\0')
-	{
+	while (envp[++i] && !path)
 		path = ft_strnstr(envp[i], "PATH=", 5);
-		if (path)
-		{
-			path = ft_substr(path, 5, ft_strlen(path) - 5);
-			break ;
-		}
-		i++;
-	}
+	if (path)
+		path = ft_substr(path, 5, ft_strlen(path) - 5);
 	paths = ft_split(path, ':');
 	if (path)
 		free(path);
