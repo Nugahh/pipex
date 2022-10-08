@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:45:35 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 12:40:12 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/08 19:52:34 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_paths(char **paths)
 	while (paths[i])
 	{
 		free(paths[i]);
-		++i;
+		i++;
 	}
 	free(paths);
 }
