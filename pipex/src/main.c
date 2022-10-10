@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/10 18:27:24 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/10 19:12:56 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,46 @@ void	first_cmd(int *fd_pipe, char **cmd, char *file, char **paths)
 	char	*path_cmd;
 
 	infile = open(file, O_RDONLY);
+	if (infile < 0)
+	{
+		free_paths(cmd);
+		free_paths(paths);
+		perror("Infile: ");
+		exit(0);
+	}
 	dup2(fd_pipe[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd_pipe[0]);
 	close(fd_pipe[1]);
 	path_cmd = check_cmd(cmd[0], paths);
-	ft_check_if_cmd_exist(path_cmd, paths);
+	if (!path_cmd)
+	{
+		free_paths(paths);
+		free_paths(cmd);
+		exit(0);
+	}
 	if (execve(path_cmd, cmd, NULL) == -1)
 		perror("First cmd error ");
 }
 
 void	second_cmd(int *fd_pipe, char **cmd, char *file, char **paths)
 {
-	int	outfile;
+	int		outfile;
+	char	*path_cmd;
 
 	outfile = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	dup2(fd_pipe[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd_pipe[0]);
 	close(fd_pipe[1]);
-	if (execve(check_cmd(cmd[0], paths), cmd, NULL) == -1)
+	path_cmd = check_cmd(cmd[0], paths);
+	if (!path_cmd)
+	{
+		free_paths(paths);
+		free_paths(cmd);
+		exit(0);
+	}
+	if (execve(path_cmd, cmd, NULL) == -1)
 		perror("Second cmd error ");
 }
 
@@ -72,6 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		paths = get_path_and_split(envp);
+	
 		pipex(argv, paths);
 		free_paths(paths);
 	}
