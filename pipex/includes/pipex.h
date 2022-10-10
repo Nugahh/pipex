@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 16:02:50 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/10 12:42:07 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		pipex(char **argv, char **paths);
 // utils
 int			check_file(char *file, int ioo);
 int			print_err(char *file);
+void	ft_check_if_cmd_exist(char *path_cmd, char	**cmd);
 void		free_paths(char **paths);
 
 #endif

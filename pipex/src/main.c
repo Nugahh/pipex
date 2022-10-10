@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/07 15:49:44 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/10 12:56:19 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 void	first_cmd(int *fd_pipe, char **cmd, char *file, char **paths)
 {
 	int	infile;
+	char	*path_cmd;
 
 	infile = open(file, O_RDONLY);
 	dup2(fd_pipe[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd_pipe[0]);
 	close(fd_pipe[1]);
-	if (execve(check_cmd(cmd[0], paths), cmd, NULL) == -1)
+	path_cmd = check_cmd(cmd[0], paths);
+	ft_check_if_cmd_exist(path_cmd, paths);
+	if (execve(path_cmd, cmd, NULL) == -1)
 		perror("First cmd error ");
 }
 
