@@ -6,17 +6,28 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:45:35 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/10 18:40:38 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/11 17:14:07 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	print_err(char *file)
+void	ft_print_cmd_error(int ioo, char *path_cmd, char **paths, char **cmd)
 {
-	ft_putstr_fd(file, 2);
-	perror(" ");
-	return (-1);
+	if (ioo < 0)
+	{
+		free_paths(cmd);
+		free_paths(paths);
+		perror("Infile: ");
+		exit(0);
+	}
+	if (!path_cmd)
+	{
+		free_paths(paths);
+		free_paths(cmd);
+		perror("First cmd error: ");
+		exit(0);
+	}
 }
 
 void	free_paths(char **paths)
