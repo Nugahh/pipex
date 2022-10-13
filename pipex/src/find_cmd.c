@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:47:41 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/11 17:12:36 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/13 19:54:36 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,8 @@ char	*check_cmd(char	*cmd, char **paths)
 	char	*tmp;
 
 	i = -1;
-	while (cmd[++i])
-	{
-		if (cmd[i] == '/')
-		{
-			if (access(cmd, F_OK | X_OK) == 0)
-				return (cmd);
-			return (NULL);
-		}
-	}
+	if (access(cmd, F_OK | X_OK) == 0)
+		return (cmd);
 	i = -1;
 	while (paths[++i])
 	{
@@ -58,19 +51,3 @@ char	*check_cmd(char	*cmd, char **paths)
 	}
 	return (NULL);
 }
-
-/* int	main()
-{
-	char *test = "/home/nugah/.local/bin:/usr/local/sbin:/usr/local/bin";
-	char **tab = malloc(sizeof(char *) * 1000);
-	tab = ft_split(test, ':');
-	char *tmp;
-	// check_cmd("cat", tab);
-	for (int i = 0; tab[i]; i++)
-	{
-		tmp = ft_strjoin(tab[i], "/");
-		tab[i] = ft_strjoin(tmp, "cat");
-		free(tmp);
-		printf("tab[i] = %s\n", tab[i]);
-	}
-} */
