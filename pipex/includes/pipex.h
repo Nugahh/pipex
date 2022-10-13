@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/11 17:13:54 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/13 20:14:01 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,20 @@
 # include <errno.h>
 # include "../libft/libft.h"
 
+typedef struct s_data
+{
+	char	**envp;
+	int		fd_pipe[2];
+}	t_data;
+
 // PATH and cmd
 char		**get_path_and_split(char **envp);
 char		*check_cmd(char	*cmd, char **paths);
 
 // exec
-void		exec_fcmd(int *fd_pipe, char **cmd, char *file, char **paths);
-void		exec_lcmd(int *fd_pipe, char **cmd, char *file, char **paths);
-void		pipex(char **argv, char **paths);
+void		exec_fcmd(t_data *data, char **cmd, char *file, char **paths);
+void		exec_lcmd(t_data *data, char **cmd, char *file, char **paths);
+void		pipex(t_data *data, char **argv, char **paths);
 
 // utils
 int			check_file(char *file, int ioo);
