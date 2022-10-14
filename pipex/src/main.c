@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/13 20:16:52 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/14 03:42:43 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	second_cmd(t_data *data, char **cmd, char *file, char **paths)
 	close(data->fd_pipe[1]);
 	path_cmd = check_cmd(cmd[0], paths);
 	if (!path_cmd)
-		ft_print_cmd_error(outfile, path_cmd, paths, cmd);
+		ft_print_cmd_error2(path_cmd, paths, cmd);
 	if (execve(path_cmd, cmd, data->envp) == -1)
 		perror("Second cmd error ");
 }
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc == 5)
 	{
-		data.envp = NULL;
+		data.envp = envp;
 		paths = get_path_and_split(envp);
 		pipex(&data, argv, paths);
 		free_paths(paths);
