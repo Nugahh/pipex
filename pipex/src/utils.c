@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:45:35 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/14 03:42:04 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/24 20:10:23 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_print_cmd_error(int ioo, char *path_cmd, char **paths, char **cmd)
 {
 	if (ioo < 0)
 	{
+	
 		free_paths(cmd);
 		free_paths(paths);
 		perror("Infile: ");
@@ -30,8 +31,15 @@ void	ft_print_cmd_error(int ioo, char *path_cmd, char **paths, char **cmd)
 	}
 }
 
-void	ft_print_cmd_error2(char *path_cmd, char **paths, char **cmd)
+void	ft_print_cmd_error2(int ioo, char *path_cmd, char **paths, char **cmd)
 {
+	if (ioo < 0)
+	{
+		free_paths(cmd);
+		free_paths(paths);
+		perror("Outfile: ");
+		exit(0);
+	}
 	if (!path_cmd)
 	{
 		free_paths(paths);

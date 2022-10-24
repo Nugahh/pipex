@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 19:42:20 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/14 03:42:22 by fwong            ###   ########.fr       */
+/*   Updated: 2022/10/24 20:04:36 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void		pipex(t_data *data, char **argv, char **paths);
 
 // utils
 int			check_file(char *file, int ioo);
-void	ft_print_cmd_error2(char *path_cmd, char **paths, char **cmd);
+void		ft_print_cmd_error2(int ioo, char *path_cmd, char **paths,
+				char **cmd);
 void		ft_print_cmd_error(int ioo, char *path_cmd, char **paths,
 				char **cmd);
 void		ft_check_if_cmd_exist(char *path_cmd, char	**cmd);
