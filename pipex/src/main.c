@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:35:49 by fwong             #+#    #+#             */
-/*   Updated: 2022/10/24 21:08:24 by fwong            ###   ########.fr       */
+/*   Updated: 2022/11/03 19:31:29 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	second_cmd(t_data *data, char **cmd, char *file, char **paths)
 	{
 		close(data->fd_pipe[0]);
 		close(data->fd_pipe[1]);
-		ft_print_cmd_error(outfile, NULL, paths, cmd);
+		ft_print_cmd_error2(outfile, NULL, paths, cmd);
 	}
 	dup2(data->fd_pipe[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
@@ -80,6 +80,7 @@ void	pipex(t_data *data, char **argv, char **paths)
 		second_cmd(data, ft_split(argv[3], ' '), argv[4], paths);
 	close(data->fd_pipe[1]);
 	close(data->fd_pipe[0]);
+	wait(&status);
 	wait(&status);
 }
 
