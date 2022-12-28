@@ -6,7 +6,7 @@
 /*   By: fwong <fwong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 18:17:29 by fwong             #+#    #+#             */
-/*   Updated: 2022/11/21 16:54:08 by fwong            ###   ########.fr       */
+/*   Updated: 2022/12/17 01:30:56 by fwong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ char	*ft_strjoin(char const	*s1, char const *s2)
 	}
 	j = 0;
 	while (s2[j])
-	{
 		ptr[i++] = s2[j++];
-	}
 	ptr[i] = '\0';
 	return (ptr);
 }
